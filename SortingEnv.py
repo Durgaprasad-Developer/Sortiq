@@ -1,23 +1,27 @@
 import random
+
 class SortingEnv:
-    items = []
-    store_capacity = 0
-    crusher_energy = 0
-    index = 0
-    item = {}
-    def __init__(self, items, store_capacity, crusher_energy, index, item):
-        self.items = items
-        self.store_capacity = store_capacity
-        self.crusher_energy = crusher_energy
-        self.index = index
-        self.item = item
+    
+
+    def __init__(self, task):
+        self.itemCount = task.itemsCount
+        self.store_capacity = task.store_capacity
+        self.crusher_energy = task.crusher_energy
+
+        self.current_storage = None
+        self.current_energy = None
+        self.current_item = None
+        self.index = None
+
+
 
     def reset(self):
-        store_capacity = self.store_capacity
-        crusher_energy = self.crusher_energy
-        index = self.index
-        list = generateSequence(items)
-        return list[index]
+        self.current_storage = self.store_capacity
+        self.current_energy = self.crusher_energy
+        self.index = 0 
+        self.current_item = generateItem()  
+        self.state = {"features":self.current_item["features"], "store_capacity": self.current_storage, "crusher_energy":self.current_energy}
+        return self.state
     
     def step(self, action):
         current_state = take_action(action)
@@ -44,6 +48,6 @@ class SortingEnv:
 
         return features
     
-    
+
 
 
