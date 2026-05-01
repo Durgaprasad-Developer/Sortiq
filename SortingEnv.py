@@ -68,22 +68,22 @@ class SortingEnv:
     
     
     
-    def generate_item(self):
-        features = {}
+    def generateItem():
+        type = random.choice(["FRUIT", "WASTE"])
 
-        colors = ["yellow", "red", "green", "orange", "brown"]
-        color = random.random(colors)
-        features.color = color
+        if type == "FRUIT":
+            color = random.choice(["Red", "Yellow", "Purple", "Green", "Orange"])
+            shape = random.choice(["Round", "Oval", "Heart", "Pear"])
+            texture = random.choice(["Hard", "Smooth", "Firm", "Juicy" ])
+        else:
+            color = random.choice(["Black", "Brown", "Purple", "Grey", "Orange"])
+            shape = random.choice(["Shriveled", "Sunken", "Round", "Oval"])
+            texture = random.choice(["Mushy", "Slimy", "Juicy", "Smooth"])
 
-        softness = ["crisp", "firm", "melting", "soft", "mushy"]
-        soft = random.random(softness)
-        features.softness = soft
+        features = {"color": color, "shape": shape, "texture": texture}
+        item = {"features": features, "type": type}
 
-        shapes = ["oval", "round", "curve"]
-        shape = random.random(shapes)
-        features.shape = shape
-
-        return features
+        return item
     
 
     
