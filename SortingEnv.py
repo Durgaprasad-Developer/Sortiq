@@ -4,9 +4,9 @@ class SortingEnv:
     
 
     def __init__(self, task):
-        self.itemCount = task.itemsCount
-        self.store_capacity = task.store_capacity
-        self.crusher_energy = task.crusher_energy
+        self.itemCount = task["itemsCount"]
+        self.store_capacity = task["store_capacity"]
+        self.crusher_energy = task["crusher_energy"]
 
         self.current_storage = None
         self.current_energy = None
@@ -45,6 +45,7 @@ class SortingEnv:
 
             self.current_energy -= 1
 
+
         reward -= 1
 
         self.index += 1
@@ -65,17 +66,17 @@ class SortingEnv:
 
              
     
-    def generateItem():
+    def generateItem(self):
         type = random.choice(["FRUIT", "WASTE"])
 
         if type == "FRUIT":
-            color = random.choice(["Red", "Yellow", "Purple", "Green", "Orange"])
-            shape = random.choice(["Round", "Oval", "Heart", "Pear"])
-            texture = random.choice(["Hard", "Smooth", "Firm", "Juicy" ])
+            color = random.choices(["Red", "Yellow", "Purple", "Green", "Orange", "Black", "Brown", "Grey"], weights=[30, 20, 16, 10, 15, 4, 3, 5])[0]
+            shape = random.choices(["Round", "Oval", "Heart", "Pear", "Shriveled", "Sunken"], weights=[30, 20, 10, 15, 6, 8])[0]
+            texture = random.choices(["Hard", "Smooth", "Firm", "Juicy", "Mushy", "Slimy"], weights=[30, 25, 20, 7, 8, 2])[0]
         else:
-            color = random.choice(["Black", "Brown", "Purple", "Grey", "Orange"])
-            shape = random.choice(["Shriveled", "Sunken", "Round", "Oval"])
-            texture = random.choice(["Mushy", "Slimy", "Juicy", "Smooth"])
+            color = random.choices(["Black", "Brown", "Purple", "Grey", "Orange", "Red", "Yellow", "Green"], weights=[30, 20, 5, 16, 6, 4, 9, 6])[0]
+            shape = random.choices(["Shriveled", "Sunken", "Round", "Oval", "Heart", "Pear"], weights = [30, 20, 5, 4, 7, 9])[0]
+            texture = random.choices(["Mushy", "Slimy", "Juicy", "Smooth", "Hard", "Firm"], weights=[25, 30, 15, 6, 8, 3])[0]
 
         features = {"color": color, "shape": shape, "texture": texture}
         item = {"features": features, "type": type}
