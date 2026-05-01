@@ -1,7 +1,7 @@
 import random
 from SortingEnv import SortingEnv
 
-task = {"itemsCount":10, "store_capacity":6, "crusher_energy":4}
+task = {"itemsCount":5, "store_capacity":3, "crusher_energy":2}
 
 env = SortingEnv(task)
 
@@ -12,6 +12,8 @@ state = env.reset()
 index = 1
 
 print("state:", state)
+print(" ")
+print(" ")
 
 while not done:
     action = random.choice(["STORE", "CRUSH"])
@@ -21,7 +23,7 @@ while not done:
     state, reward, done = env.step(action)
 
     print("index", index)
-    print("state", state)
+    print("next state", state)
     print("reward", reward)
     print("done", done)
     print("--------------------")

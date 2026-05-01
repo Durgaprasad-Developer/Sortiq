@@ -16,6 +16,7 @@ class SortingEnv:
 
 
     def reset(self):
+        self.item_id = 1
         self.current_storage = self.store_capacity
         self.current_energy = self.crusher_energy
         self.index = 0 
@@ -79,7 +80,8 @@ class SortingEnv:
             texture = random.choices(["Mushy", "Slimy", "Juicy", "Smooth", "Hard", "Firm"], weights=[25, 30, 15, 6, 8, 3])[0]
 
         features = {"color": color, "shape": shape, "texture": texture}
-        item = {"features": features, "type": type}
+        item = {"features": features, "type": type, "item_id": self.item_id}
+        self.item_id += 1
 
         return item
     
