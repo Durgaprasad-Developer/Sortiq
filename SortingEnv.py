@@ -34,7 +34,7 @@ class SortingEnv:
             if self.current_item["type"] != "FRUIT":
                 reward -= 10
             else:
-                reward += 5
+                reward += 10
 
             self.current_storage -= 1
 
@@ -42,7 +42,7 @@ class SortingEnv:
             if self.current_item["type"] != "WASTE":
                 reward -= 10
             else:
-                reward += 5
+                reward += 10
 
             self.current_energy -= 1
 
