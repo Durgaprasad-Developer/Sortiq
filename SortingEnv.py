@@ -19,7 +19,7 @@ class SortingEnv:
         self.current_storage = self.store_capacity
         self.current_energy = self.crusher_energy
         self.index = 0 
-        self.current_item = generateItem()  
+        self.current_item = self.generateItem()  
         self.state = {"features":self.current_item["features"], "store_capacity": self.current_storage, "crusher_energy":self.current_energy}
         return self.state
     
@@ -58,15 +58,12 @@ class SortingEnv:
             done = True
 
         if not done:
-            self.current_item = generateItem()  
+            self.current_item = self.generateItem()  
             self.state = {"features":self.current_item["features"], "store_capacity": self.current_storage, "crusher_energy":self.current_energy}
 
         return self.state, reward, done
 
-            
-        
-    
-    
+             
     
     def generateItem():
         type = random.choice(["FRUIT", "WASTE"])
