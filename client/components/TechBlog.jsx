@@ -6,10 +6,10 @@
 const MONO = "'JetBrains Mono', monospace";
 
 const rewardData = [
-  { outcome: "SORT_CORRECT",   reward: "+8.0",  desc: "Fruit stored OR Waste crushed",              pos: true,  fatal: false },
-  { outcome: "SORT_INCORRECT", reward: "-8.0",  desc: "Waste stored OR Fruit crushed",              pos: false, fatal: false },
-  { outcome: "SYSTEM_CRASH",   reward: "-20.0", desc: "Storage overflow — buffer exceeds 6 units",  pos: false, fatal: true  },
-  { outcome: "OUT_OF_ENERGY",  reward: "-10.0", desc: "Batch incomplete due to power failure",      pos: false, fatal: false },
+  { outcome: "SORT_CORRECT",    reward: "+8.0",  desc: "Fruit stored OR Waste crushed",              pos: true,  fatal: false },
+  { outcome: "SORT_INCORRECT",  reward: "-8.0",  desc: "Waste stored OR Fruit crushed",              pos: false, fatal: false },
+  { outcome: "EPISODE_SUCCESS", reward: "+15.0", desc: "All 10 items processed successfully",      pos: true,  fatal: false },
+  { outcome: "SYSTEM_FAILURE",  reward: "-20.0", desc: "Storage overflow OR out of energy",         pos: false, fatal: true  },
 ];
 
 const stateVars = [
