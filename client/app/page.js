@@ -253,23 +253,20 @@ export default function Home() {
   return (
     <main className="w-full min-h-screen bg-[#05050a] selection:bg-[#3a86ff]/30">
       
-      {/* SECTION 1: THE VISUALIZER (SMALL & COMPACT) */}
-      <section className="relative w-full h-[60vh] border-b border-white/10 bg-[#05050a] overflow-hidden">
+      {/* SIMULATION SECTION */}
+      <section className="relative w-full h-[65vh] min-h-[500px] border-b border-white/10 bg-[#05050a] flex items-center justify-center">
         <MatrixBackground />
         
         {episodeBanner && (
           <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none anim-episode-banner">
-            <div style={{
-              fontSize: 12, color: '#ffd32a', fontFamily: '"Press Start 2P", monospace',
-              padding: '14px 28px', background: '#070d10ee',
-              border: '2px solid #ffd32a', boxShadow: '0 0 40px rgba(255,211,42,0.4)',
-            }}>
+            <div className="text-xs text-[#ffd32a] font-mono p-6 bg-[#070d10ee] border-2 border-[#ffd32a] shadow-[0_0_40px_rgba(255,211,42,0.4)]">
               {episodeBanner}
             </div>
           </div>
         )}
 
-        <div className="relative z-10 w-full h-full p-4 flex flex-col gap-2 transform scale-[0.8] origin-top">
+        {/* Inner App Container (Centering everything) */}
+        <div className="relative z-10 w-full max-w-6xl h-full p-6 flex flex-col gap-4">
           <HUD
             episode={episode} score={score} storage={storage} energy={energy}
             itemIndex={itemIndex} running={running}
@@ -277,20 +274,18 @@ export default function Home() {
             speed={speed} onSpeedChange={setSpeed}
           />
 
-          <div className="flex gap-2 flex-1 min-h-0">
+          <div className="flex gap-4 flex-1 min-h-0">
             <EnvPanel stats={stats} episode={episode} />
 
-            <div className="flex flex-col gap-2 flex-1 min-w-0">
-              <div className="pixel-border p-2 scanlines relative" style={{ background: '#040a0d' }}>
+            <div className="flex flex-col gap-4 flex-1 min-w-0">
+              <div className="pixel-border p-2 scanlines relative bg-[#040a0d] flex-1">
                 <ConveyorBelt item={currentItem} phase={phase} itemIndex={itemIndex} />
               </div>
 
-              <div className="flex gap-2" style={{ flex: '0 0 auto' }}>
+              <div className="flex gap-4 h-[180px]">
                 <AgentBrain qValues={qValues} phase={phase} lastAction={lastAction} isCorrect={lastCorrect} />
                 <ConsoleLog logs={logs} />
               </div>
-
-              <LiveGraph episodeScores={episodeScores} currentScore={score} running={running} />
             </div>
 
             <ActionZones
@@ -299,20 +294,22 @@ export default function Home() {
             />
           </div>
 
-          <div style={{
-            fontSize: 6, color: '#2a5540', fontFamily: '"Share Tech Mono", monospace',
-            display: 'flex', justifyContent: 'space-between',
-            marginTop: 'auto'
-          }}>
-            <span>⚡ SORTIQ // Q-LEARNING VISUALIZER // ENV: {backendStatus === 'ONLINE' ? 'HF-SPACES' : 'SIMULATED'}</span>
-            <span style={{ color: backendStatus === 'ONLINE' ? '#00ff9f' : '#ff3355' }}>BACKEND: {backendStatus}</span>
-            <span>ACCURACY: {stats.totalItems ? Math.round(stats.correctItems / stats.totalItems * 100) : '--'}% · ITEMS: {stats.totalItems} · EPS: {episode - 1}</span>
+          <div className="flex justify-between items-center text-[10px] font-mono tracking-widest text-gray-700">
+            <div className="flex gap-6 uppercase">
+              <span>System: <span className={running ? "text-[#06d6a0]" : "text-[#ff6b6b]"}>{running ? 'ONLINE' : 'IDLE'}</span></span>
+              <span>Backend: {backendStatus}</span>
+            </div>
+            <div className="flex gap-6 uppercase">
+              <span>ACCURACY: {stats.totalItems ? Math.round(stats.correctItems / stats.totalItems * 100) : '--'}%</span>
+              <span>ITEMS: {stats.totalItems}</span>
+              <span>EPS: {episode - 1}</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 2: THE TECHNICAL BLOG (CLEAN SCROLL) */}
-      <section className="w-full bg-[#020205] relative z-20">
+      {/* DOCUMENTATION SECTION */}
+      <section className="w-full relative z-20">
         <TechBlog />
       </section>
 
