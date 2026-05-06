@@ -94,5 +94,3 @@ const TechBlog = () => {
 };
 
 export default TechBlog;
-
-export default TechBlog;
