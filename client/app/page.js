@@ -8,6 +8,7 @@ import ActionZones  from '../components/ActionZones'
 import ConsoleLog   from '../components/ConsoleLog'
 import LiveGraph    from '../components/LiveGraph'
 import EnvPanel     from '../components/EnvPanel'
+import TechBlog     from '@/components/TechBlog'
 
 const MatrixBackground = dynamic(() => import('../components/MatrixBackground'), { ssr: false })
 
@@ -305,6 +306,8 @@ export default function Home() {
           <span>ACCURACY: {stats.totalItems ? Math.round(stats.correctItems / stats.totalItems * 100) : '--'}% · ITEMS: {stats.totalItems} · EPS: {episode - 1}</span>
         </div>
       </div>
+
+      <TechBlog />
     </main>
-  )
+  );
 }
