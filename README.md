@@ -2,7 +2,7 @@
 title: Sortiq
 emoji: 🍎
 colorFrom: green
-colorTo: emerald
+colorTo: yellow
 sdk: docker
 pinned: false
 ---
