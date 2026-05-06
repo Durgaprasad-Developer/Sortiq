@@ -5,7 +5,6 @@ import HUD          from '../components/HUD'
 import ConveyorBelt from '../components/ConveyorBelt'
 import AgentBrain   from '../components/AgentBrain'
 import ActionZones  from '../components/ActionZones'
-import ConsoleLog   from '../components/ConsoleLog'
 import LiveGraph    from '../components/LiveGraph'
 import EnvPanel     from '../components/EnvPanel'
 import TechBlog     from '@/components/TechBlog'
@@ -48,7 +47,6 @@ const INITIAL_STATE = {
   lastAction:    null,
   lastCorrect:   null,
   qValues:       null,
-  logs:          [],
   episodeScores: [],
   stats:         { ...INITIAL_STATS },
 }
@@ -66,10 +64,6 @@ export default function Home() {
   const stateRef   = useRef(state)
   stateRef.current = state
   runningRef.current = running;
-
-  const addLog = useCallback((msg) => {
-    setState(s => ({ ...s, logs: [...s.logs.slice(-100), msg] }))
-  }, [])
 
   // ── Check Backend Health ─────────────────────────────────────
   useEffect(() => {
@@ -109,7 +103,6 @@ export default function Home() {
       setState(nextState);
       return nextState;
     } catch (e) {
-      addLog(`❌ ERROR: Backend reset failed`);
       setRunning(false);
       return null;
     }
@@ -122,25 +115,17 @@ export default function Home() {
       const T = TIMING(speed);
 
       // 1. INCOMING
-      addLog(`// EP:${String(s.episode).padStart(3,'0')} ITEM ${s.itemIndex + 1}/10`);
       setState(prev => ({ ...prev, phase: 'INCOMING' }));
       await delay(T.INCOMING);
       if (!runningRef.current) break;
 
       // 2. THINKING
-      setState(prev => ({ ...prev, phase: 'THINKING' }));
       try {
         const res = await fetch(`${API_URL}/agent-step`, { method: 'POST' });
         const decision = await res.json();
-        
-        const item = decision.item;
-        const isFruit = item.type === 'FRUIT';
-        const preferred = decision.q_values.STORE >= decision.q_values.CRUSH ? 'STORE' : 'CRUSH'
-        const confidence = Math.abs(decision.q_values.STORE - decision.q_values.CRUSH).toFixed(1)
+        const { item, q_values: qValues } = decision;
 
-        addLog(`   ${isFruit ? '🍎' : '🗑️'} ${item.features.color}-${item.features.shape}-${item.features.texture}`)
-        addLog(`   🤔 Agent leans toward ${preferred} (gap: ${confidence})`)
-        setState(prev => ({ ...prev, qValues: decision.q_values }));
+        setState(prev => ({ ...prev, phase: 'THINKING', currentItem: item, qValues }));
         
         await delay(T.THINKING);
         if (!runningRef.current) break;
@@ -151,14 +136,10 @@ export default function Home() {
         newStats.totalItems++;
         newStats.actionStore += (action === 'STORE' ? 1 : 0);
         newStats.actionCrush += (action === 'CRUSH' ? 1 : 0);
-        if (isFruit) { newStats.fruitTotal++; if (isCorrect) newStats.fruitCorrect++; }
-        else         { newStats.wasteTotal++; if (isCorrect) newStats.wasteCorrect++; }
+        if (item.type === 'FRUIT') { newStats.fruitTotal++; if (isCorrect) newStats.fruitCorrect++; }
+        else                       { newStats.wasteTotal++; if (isCorrect) newStats.wasteCorrect++; }
         if (isCorrect) { newStats.correctItems++; newStats.rewardPlus++; }
         else           { newStats.rewardMinus++; }
-
-        addLog(isCorrect
-          ? `   ✅ Correct! ${item.type} → ${action}  (+${reward} pts)`
-          : `   ❌ Wrong!  ${item.type} should NOT go to ${action}  (${reward} pts)`)
 
         setState(prev => ({
           ...prev,
@@ -180,13 +161,6 @@ export default function Home() {
           const finStats = { ...newStats };
           if (resourceFail) finStats.episodesFailed++;
           else              finStats.episodesCompleted++;
-
-          addLog(`// ─────────────────────────────`);
-          addLog(resourceFail
-            ? `// 💀 EP ${s.episode} FAILED — resources depleted`
-            : `// 🏁 EP ${s.episode} COMPLETE — all items sorted!`);
-          addLog(`   🏆 FINAL SCORE: ${score}`);
-          addLog(`// ─────────────────────────────`);
 
           setState(prev => ({
             ...prev,
@@ -211,22 +185,9 @@ export default function Home() {
         }
       } catch (err) {
         console.error("Simulation error:", err);
-        addLog(`❌ ERROR: API connection lost`);
-        addLog(`🔄 Attempting to reconnect...`);
-        // Wait and check health
-        await delay(2000);
-        const alive = await checkBackend();
-        if (!alive) {
-          addLog(`⚠️ Backend is OFFLINE. Simulation stopped.`);
-          setRunning(false);
-          break;
-        } else {
-          addLog(`✅ Reconnected! Resuming...`);
-          continue; // Try again
-        }
       }
     }
-  }, [speed, addLog]);
+  }, [speed]);
 
   useEffect(() => {
     if (running) {
@@ -235,9 +196,8 @@ export default function Home() {
   }, [running, runSimulation]);
 
   const handleStart = async () => {
-    if (backendStatus !== 'ONLINE') {
-      addLog(`⚠️ Backend is OFFLINE. Cannot start.`);
-      return;
+    if (backendStatus === 'OFFLINE') {
+      return
     }
     setRunning(true);
   }
@@ -247,7 +207,7 @@ export default function Home() {
   const {
     phase, episode, itemIndex, score, storage, energy,
     currentItem, lastAction, lastCorrect, qValues,
-    logs, episodeScores, stats,
+    episodeScores, stats,
   } = state
 
   return (
@@ -293,7 +253,6 @@ export default function Home() {
 
               <div className="flex gap-4 h-[180px]">
                 <AgentBrain qValues={qValues} phase={phase} lastAction={lastAction} isCorrect={lastCorrect} />
-                <ConsoleLog logs={logs} />
               </div>
             </div>
 

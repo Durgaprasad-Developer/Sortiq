@@ -70,7 +70,11 @@ export default function HUD({ episode, score, storage, energy, itemIndex, runnin
         </div>
         
         <button
-          onClick={running ? onPause : onStart}
+          onPointerDown={(e) => e.preventDefault()}
+          onClick={(e) => {
+            e.currentTarget.blur();
+            running ? onPause() : onStart();
+          }}
           className="hover:brightness-125 transition-all"
           style={{
             fontSize: 9, padding: '10px 18px',

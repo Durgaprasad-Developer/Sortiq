@@ -2,8 +2,12 @@
 import { useEffect, useRef } from 'react'
 
 export default function ConsoleLog({ logs }) {
-  const endRef = useRef(null)
-  useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [logs])
+  const scrollRef = useRef(null)
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    }
+  }, [logs])
 
   const getLineColor = (log) => {
     if (log.includes('✅'))       return '#00ff9f'
@@ -25,7 +29,11 @@ export default function ConsoleLog({ logs }) {
       </div>
 
       {/* Lines */}
-      <div className="flex-1 overflow-y-auto p-4" style={{ maxHeight: 180 }}>
+      <div 
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto p-4" 
+        style={{ maxHeight: 180 }}
+      >
         {logs.length === 0 && (
           <div style={{ fontSize: 13, color: '#2a5540', fontFamily: '"Share Tech Mono", monospace' }}>
             // Press START to begin simulation
@@ -37,7 +45,6 @@ export default function ConsoleLog({ logs }) {
             {log}
           </div>
         ))}
-        <div ref={endRef} />
       </div>
 
       <div className="px-4 pb-2" style={{ fontSize: 14, color: '#00ff9f' }}>
