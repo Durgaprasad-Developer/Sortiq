@@ -254,15 +254,15 @@ export default function Home() {
     <main className="w-full bg-[#05050a] selection:bg-[#3a86ff]/30">
       
       {/* SECTION 1: THE APP STAGE (Fixed-Height Hero) */}
-      <section className="relative w-full h-[740px] bg-[#05050a] border-b border-white/5 flex flex-col items-center pt-20 overflow-x-auto overflow-y-hidden scrollbar-hide">
+      <section className="relative w-full h-[780px] bg-[#05050a] border-b border-white/5 flex flex-col items-center pt-16 overflow-visible">
         <MatrixBackground />
         
         {/* Title Header */}
-        <div className="relative z-20 mb-8 text-center">
-          <h2 className="text-[10px] font-mono tracking-[0.6em] text-[#3a86ff] uppercase opacity-70 flex items-center gap-4 justify-center">
-            <span className="w-8 h-[1px] bg-[#3a86ff]/30" />
+        <div className="relative z-20 mb-6 text-center">
+          <h2 className="text-[9px] font-mono tracking-[0.6em] text-[#3a86ff] uppercase opacity-70 flex items-center gap-4 justify-center">
+            <span className="w-6 h-[1px] bg-[#3a86ff]/30" />
             Inference Visualization
-            <span className="w-8 h-[1px] bg-[#3a86ff]/30" />
+            <span className="w-6 h-[1px] bg-[#3a86ff]/30" />
           </h2>
         </div>
         
@@ -275,7 +275,7 @@ export default function Home() {
         )}
 
         {/* Dashboard Stage (Natural sizing, Centered) */}
-        <div className="relative z-10 w-full max-w-[95%] lg:max-w-5xl flex flex-col gap-4 p-4">
+        <div className="relative z-30 w-full max-w-[95%] lg:max-w-5xl flex flex-col gap-3 p-2">
           <HUD
             episode={episode} score={score} storage={storage} energy={energy}
             itemIndex={itemIndex} running={running}
