@@ -23,9 +23,11 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Press Start 2P', monospace;
-  overflow: hidden;
+  font-family: 'Share Tech Mono', sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
   image-rendering: pixelated;
+  scroll-behavior: smooth;
 }
 
 /* ── Pixel border utility ─────────────────────────── */

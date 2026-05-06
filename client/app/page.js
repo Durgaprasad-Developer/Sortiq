@@ -253,8 +253,8 @@ export default function Home() {
   return (
     <main className="w-full bg-[#05050a] selection:bg-[#3a86ff]/30">
       
-      {/* SIMULATION SECTION (TOP WORLD) */}
-      <section className="relative w-full h-[620px] bg-[#05050a] border-b border-white/10 flex items-center justify-center overflow-hidden">
+      {/* SECTION 1: THE APP STAGE (Fixed-Height Hero) */}
+      <section className="relative w-full h-[680px] bg-[#05050a] border-b border-white/5 flex items-center justify-center overflow-hidden">
         <MatrixBackground />
         
         {episodeBanner && (
@@ -265,8 +265,8 @@ export default function Home() {
           </div>
         )}
 
-        {/* Dashboard Container (Compact & Centered) */}
-        <div className="relative z-10 w-full max-w-5xl h-[580px] flex flex-col gap-3 p-4">
+        {/* Dashboard Stage (Natural sizing, Centered) */}
+        <div className="relative z-10 w-full max-w-5xl flex flex-col gap-4 p-6">
           <HUD
             episode={episode} score={score} storage={storage} energy={energy}
             itemIndex={itemIndex} running={running}
@@ -274,15 +274,15 @@ export default function Home() {
             speed={speed} onSpeedChange={setSpeed}
           />
 
-          <div className="flex gap-3 flex-1 min-h-0">
+          <div className="flex gap-4 flex-1 h-[400px]">
             <EnvPanel stats={stats} episode={episode} />
 
-            <div className="flex flex-col gap-3 flex-1 min-w-0">
-              <div className="pixel-border p-2 scanlines relative bg-[#040a0d] flex-1">
+            <div className="flex flex-col gap-4 flex-1 min-w-0">
+              <div className="pixel-border p-3 scanlines relative bg-[#040a0d] flex-1">
                 <ConveyorBelt item={currentItem} phase={phase} itemIndex={itemIndex} />
               </div>
 
-              <div className="flex gap-3 h-[160px]">
+              <div className="flex gap-4 h-[180px]">
                 <AgentBrain qValues={qValues} phase={phase} lastAction={lastAction} isCorrect={lastCorrect} />
                 <ConsoleLog logs={logs} />
               </div>
@@ -294,20 +294,20 @@ export default function Home() {
             />
           </div>
 
-          <footer className="flex justify-between items-center text-[9px] font-mono tracking-[0.2em] text-gray-700 mt-2">
-            <div className="flex gap-4">
-              <span>SYSTEM: <span className={running ? "text-[#06d6a0]" : "text-[#ff6b6b]"}>{running ? 'ACTIVE' : 'IDLE'}</span></span>
-              <span>EP: {episode - 1}</span>
+          <footer className="flex justify-between items-center text-[9px] font-mono tracking-[0.3em] text-gray-800 uppercase italic">
+            <div className="flex gap-8">
+              <span>System: <span className={running ? "text-[#06d6a0]" : "text-[#ff6b6b]"}>{running ? 'Simulating' : 'Standby'}</span></span>
+              <span>EP_{episode - 1}</span>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-8">
               <span>ACCURACY: {stats.totalItems ? Math.round(stats.correctItems / stats.totalItems * 100) : '--'}%</span>
-              <span>ITEMS: {stats.totalItems}</span>
+              <span>ITEMS_COUNT: {stats.totalItems}</span>
             </div>
           </footer>
         </div>
       </section>
 
-      {/* DOCUMENTATION SECTION (BOTTOM WORLD) */}
+      {/* SECTION 2: THE TECHNICAL DOCUMENT (Natural Scroll) */}
       <section className="w-full relative z-20">
         <TechBlog />
       </section>
