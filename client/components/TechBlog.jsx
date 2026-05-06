@@ -2,8 +2,8 @@ import React from 'react';
 
 const TechBlog = () => {
   return (
-    <article id="tech-blog" className="w-full bg-[#020205] text-gray-300 font-sans selection:bg-[#3a86ff]/30 py-48 px-6 overflow-hidden">
-      <div className="max-w-2xl mx-auto">
+    <article id="tech-blog" className="w-full bg-[#020205] text-gray-400 font-sans selection:bg-[#3a86ff]/30 py-48 px-6 flex flex-col items-center">
+      <div className="w-full max-w-4xl space-y-32">
         
         {/* HEADER */}
         <header className="mb-40 text-center space-y-8">

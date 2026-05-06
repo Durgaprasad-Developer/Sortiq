@@ -28,8 +28,8 @@ function ResourceBar({ label, value, max, color }) {
 export default function HUD({ episode, score, storage, energy, itemIndex, running, onStart, onPause, speed, onSpeedChange }) {
   return (
     <div
-      className="pixel-border scanlines relative flex items-center px-5 py-3 gap-8"
-      style={{ background: '#040a0d', flexWrap: 'nowrap', minHeight: 64 }}
+      className="pixel-border scanlines relative flex items-center px-5 py-3 gap-4 md:gap-8 flex-wrap"
+      style={{ background: '#040a0d', minHeight: 64 }}
     >
       {/* Logo */}
       <div style={{ fontSize: 13, whiteSpace: 'nowrap' }} className="glow-green">

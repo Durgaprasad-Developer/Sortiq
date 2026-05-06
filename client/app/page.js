@@ -254,7 +254,7 @@ export default function Home() {
     <main className="w-full bg-[#05050a] selection:bg-[#3a86ff]/30">
       
       {/* SECTION 1: THE APP STAGE (Fixed-Height Hero) */}
-      <section className="relative w-full h-[680px] bg-[#05050a] border-b border-white/5 flex items-center justify-center overflow-hidden">
+      <section className="relative w-full h-[680px] bg-[#05050a] border-b border-white/5 flex items-center justify-center overflow-x-auto overflow-y-hidden scrollbar-hide">
         <MatrixBackground />
         
         {episodeBanner && (
@@ -266,7 +266,7 @@ export default function Home() {
         )}
 
         {/* Dashboard Stage (Natural sizing, Centered) */}
-        <div className="relative z-10 w-full max-w-5xl flex flex-col gap-4 p-6">
+        <div className="relative z-10 w-full max-w-[95%] lg:max-w-5xl flex flex-col gap-4 p-4">
           <HUD
             episode={episode} score={score} storage={storage} energy={energy}
             itemIndex={itemIndex} running={running}
