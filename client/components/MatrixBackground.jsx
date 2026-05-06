@@ -51,7 +51,7 @@ export default function MatrixBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 opacity-30"
+      className="absolute inset-0 z-0 opacity-30 pointer-events-none"
       style={{ imageRendering: 'pixelated' }}
     />
   )

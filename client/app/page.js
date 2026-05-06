@@ -251,10 +251,10 @@ export default function Home() {
   } = state
 
   return (
-    <main className="w-full min-h-screen bg-[#05050a] overflow-y-auto overflow-x-hidden selection:bg-[#3a86ff]/30">
+    <main className="w-full min-h-screen bg-[#05050a] selection:bg-[#3a86ff]/30">
       
-      {/* SECTION 1: THE VISUALIZER (COMPACT) */}
-      <section className="relative w-full h-[65vh] border-b border-white/10 bg-[#05050a] overflow-hidden">
+      {/* SECTION 1: THE VISUALIZER (SMALL & COMPACT) */}
+      <section className="relative w-full h-[60vh] border-b border-white/10 bg-[#05050a] overflow-hidden">
         <MatrixBackground />
         
         {episodeBanner && (
@@ -269,7 +269,7 @@ export default function Home() {
           </div>
         )}
 
-        <div className="relative z-10 w-full h-full p-4 flex flex-col gap-2 transform scale-[0.85] origin-top">
+        <div className="relative z-10 w-full h-full p-4 flex flex-col gap-2 transform scale-[0.8] origin-top">
           <HUD
             episode={episode} score={score} storage={storage} energy={energy}
             itemIndex={itemIndex} running={running}
