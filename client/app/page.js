@@ -266,7 +266,7 @@ export default function Home() {
         </div>
       )}
 
-      <div className="relative z-10 flex flex-col gap-2 p-3" style={{ height: '100vh' }}>
+      <div className="relative z-10 flex flex-col gap-2 p-3" style={{ height: '75vh' }}>
 
         <HUD
           episode={episode} score={score} storage={storage} energy={energy}
@@ -305,6 +305,13 @@ export default function Home() {
           <span style={{ color: backendStatus === 'ONLINE' ? '#00ff9f' : '#ff3355' }}>BACKEND: {backendStatus}</span>
           <span>ACCURACY: {stats.totalItems ? Math.round(stats.correctItems / stats.totalItems * 100) : '--'}% · ITEMS: {stats.totalItems} · EPS: {episode - 1}</span>
         </div>
+      </div>
+
+      {/* Aesthetic Section Break */}
+      <div className="w-full flex flex-col items-center mt-32 mb-10 opacity-30">
+        <div className="h-px w-64 bg-gradient-to-r from-transparent via-[#3a86ff] to-transparent mb-4" />
+        <span className="text-[10px] font-mono tracking-[0.5em] text-white uppercase italic">System Deep-Dive</span>
+        <div className="h-px w-64 bg-gradient-to-r from-transparent via-[#3a86ff] to-transparent mt-4" />
       </div>
 
       <TechBlog />
