@@ -251,70 +251,71 @@ export default function Home() {
   } = state
 
   return (
-    <main className="relative min-h-screen flex flex-col" style={{ background: 'var(--bg)' }}>
-      <MatrixBackground />
-
-      {episodeBanner && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none anim-episode-banner">
-          <div style={{
-            fontSize: 12, color: '#ffd32a', fontFamily: '"Press Start 2P", monospace',
-            padding: '14px 28px', background: '#070d10ee',
-            border: '2px solid #ffd32a', boxShadow: '0 0 40px rgba(255,211,42,0.4)',
-          }}>
-            {episodeBanner}
-          </div>
-        </div>
-      )}
-
-      <div className="relative z-10 flex flex-col gap-2 p-3" style={{ height: '75vh' }}>
-
-        <HUD
-          episode={episode} score={score} storage={storage} energy={energy}
-          itemIndex={itemIndex} running={running}
-          onStart={handleStart} onPause={handlePause}
-          speed={speed} onSpeedChange={setSpeed}
-        />
-
-        <div className="flex gap-2 flex-1 min-h-0">
-          <EnvPanel stats={stats} episode={episode} />
-
-          <div className="flex flex-col gap-2 flex-1 min-w-0">
-            <div className="pixel-border p-2 scanlines relative" style={{ background: '#040a0d' }}>
-              <ConveyorBelt item={currentItem} phase={phase} itemIndex={itemIndex} />
+    <main className="w-full min-h-screen bg-[#05050a] overflow-y-auto overflow-x-hidden selection:bg-[#3a86ff]/30">
+      
+      {/* SECTION 1: THE VISUALIZER (COMPACT) */}
+      <section className="relative w-full h-[65vh] border-b border-white/10 bg-[#05050a] overflow-hidden">
+        <MatrixBackground />
+        
+        {episodeBanner && (
+          <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none anim-episode-banner">
+            <div style={{
+              fontSize: 12, color: '#ffd32a', fontFamily: '"Press Start 2P", monospace',
+              padding: '14px 28px', background: '#070d10ee',
+              border: '2px solid #ffd32a', boxShadow: '0 0 40px rgba(255,211,42,0.4)',
+            }}>
+              {episodeBanner}
             </div>
-
-            <div className="flex gap-2" style={{ flex: '0 0 auto' }}>
-              <AgentBrain qValues={qValues} phase={phase} lastAction={lastAction} isCorrect={lastCorrect} />
-              <ConsoleLog logs={logs} />
-            </div>
-
-            <LiveGraph episodeScores={episodeScores} currentScore={score} running={running} />
           </div>
+        )}
 
-          <ActionZones
-            phase={phase} lastAction={lastAction} isCorrect={lastCorrect}
-            storage={storage} energy={energy}
+        <div className="relative z-10 w-full h-full p-4 flex flex-col gap-2 transform scale-[0.85] origin-top">
+          <HUD
+            episode={episode} score={score} storage={storage} energy={energy}
+            itemIndex={itemIndex} running={running}
+            onStart={handleStart} onPause={handlePause}
+            speed={speed} onSpeedChange={setSpeed}
           />
+
+          <div className="flex gap-2 flex-1 min-h-0">
+            <EnvPanel stats={stats} episode={episode} />
+
+            <div className="flex flex-col gap-2 flex-1 min-w-0">
+              <div className="pixel-border p-2 scanlines relative" style={{ background: '#040a0d' }}>
+                <ConveyorBelt item={currentItem} phase={phase} itemIndex={itemIndex} />
+              </div>
+
+              <div className="flex gap-2" style={{ flex: '0 0 auto' }}>
+                <AgentBrain qValues={qValues} phase={phase} lastAction={lastAction} isCorrect={lastCorrect} />
+                <ConsoleLog logs={logs} />
+              </div>
+
+              <LiveGraph episodeScores={episodeScores} currentScore={score} running={running} />
+            </div>
+
+            <ActionZones
+              phase={phase} lastAction={lastAction} isCorrect={lastCorrect}
+              storage={storage} energy={energy}
+            />
+          </div>
+
+          <div style={{
+            fontSize: 6, color: '#2a5540', fontFamily: '"Share Tech Mono", monospace',
+            display: 'flex', justifyContent: 'space-between',
+            marginTop: 'auto'
+          }}>
+            <span>⚡ SORTIQ // Q-LEARNING VISUALIZER // ENV: {backendStatus === 'ONLINE' ? 'HF-SPACES' : 'SIMULATED'}</span>
+            <span style={{ color: backendStatus === 'ONLINE' ? '#00ff9f' : '#ff3355' }}>BACKEND: {backendStatus}</span>
+            <span>ACCURACY: {stats.totalItems ? Math.round(stats.correctItems / stats.totalItems * 100) : '--'}% · ITEMS: {stats.totalItems} · EPS: {episode - 1}</span>
+          </div>
         </div>
+      </section>
 
-        <div style={{
-          fontSize: 6, color: '#2a5540', fontFamily: '"Share Tech Mono", monospace',
-          display: 'flex', justifyContent: 'space-between',
-        }}>
-          <span>⚡ SORTIQ // Q-LEARNING VISUALIZER // ENV: {backendStatus === 'ONLINE' ? 'HF-SPACES' : 'SIMULATED'}</span>
-          <span style={{ color: backendStatus === 'ONLINE' ? '#00ff9f' : '#ff3355' }}>BACKEND: {backendStatus}</span>
-          <span>ACCURACY: {stats.totalItems ? Math.round(stats.correctItems / stats.totalItems * 100) : '--'}% · ITEMS: {stats.totalItems} · EPS: {episode - 1}</span>
-        </div>
-      </div>
+      {/* SECTION 2: THE TECHNICAL BLOG (CLEAN SCROLL) */}
+      <section className="w-full bg-[#020205] relative z-20">
+        <TechBlog />
+      </section>
 
-      {/* Aesthetic Section Break */}
-      <div className="w-full flex flex-col items-center mt-32 mb-10 opacity-30">
-        <div className="h-px w-64 bg-gradient-to-r from-transparent via-[#3a86ff] to-transparent mb-4" />
-        <span className="text-[10px] font-mono tracking-[0.5em] text-white uppercase italic">System Deep-Dive</span>
-        <div className="h-px w-64 bg-gradient-to-r from-transparent via-[#3a86ff] to-transparent mt-4" />
-      </div>
-
-      <TechBlog />
     </main>
   );
 }
