@@ -1,98 +1,119 @@
 const TechBlog = () => {
   return (
-    <article id="tech-blog" className="w-full bg-[#05050a] text-gray-400 font-sans selection:bg-[#3a86ff]/30 py-32 px-12 md:px-24">
-      <div className="w-full space-y-48">
+    <article id="tech-blog" className="w-full bg-[#020406] text-gray-400 font-sans selection:bg-[#3a86ff]/30 py-24 px-8 md:px-20 relative overflow-hidden">
+      
+      {/* BACKGROUND GRID DECOR */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(#3a86ff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+      <div className="w-full max-w-[1400px] mx-auto space-y-32 relative z-10">
         
-        {/* 1. PROJECT PURPOSE */}
-        <section className="space-y-12 border-b border-white/5 pb-24">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white uppercase font-mono">
-            Project Purpose // RL Learning
-          </h1>
-          <p className="text-2xl leading-relaxed text-gray-500 max-w-6xl font-light">
-            I built Sortiq as a personal project to understand the core mechanics of <strong>Reinforcement Learning</strong>. The goal was to create a classification task that operates under physical constraints, forcing an agent to learn not just the "correct" category, but the optimal timing of actions to avoid environmental failure.
-          </p>
-        </section>
-
-        {/* 2. THE ENVIRONMENT */}
-        <section className="space-y-12">
-          <h2 className="text-3xl font-bold text-white tracking-tight">01 // Environment & Constraints</h2>
-          <div className="space-y-8 text-xl leading-relaxed text-gray-400">
-            <p>
-              The simulation is a constrained Markov Decision Process (MDP). The agent manages a conveyor belt with two primary bottlenecks:
-            </p>
-            <ul className="space-y-6 list-none">
-              <li className="flex gap-6 items-start">
-                <span className="text-[#3a86ff] text-2xl">•</span>
-                <p><strong>Storage Capacity:</strong> A strict 6-unit limit. Storing a 7th item triggers a system crash, resulting in a heavy reward penalty.</p>
-              </li>
-              <li className="flex gap-6 items-start">
-                <span className="text-[#3a86ff] text-2xl">•</span>
-                <p><strong>Energy Scarcity:</strong> Every action costs power. The agent has a budget of 4 energy units to handle 10 items per episode.</p>
-              </li>
-            </ul>
+        {/* 01. PURPOSE SECTION */}
+        <section className="space-y-10">
+          <div className="flex items-center gap-4 text-[#3a86ff] font-mono text-[10px] tracking-[0.5em] uppercase">
+            <span className="px-2 py-1 border border-[#3a86ff]/30 bg-[#3a86ff]/5">DOC_01</span>
+            <span>// Project Purpose</span>
+            <div className="flex-1 h-[1px] bg-gradient-to-r from-[#3a86ff]/30 to-transparent" />
           </div>
-        </section>
-
-        {/* 3. REWARD LOGIC */}
-        <section className="space-y-12">
-          <h2 className="text-3xl font-bold text-white tracking-tight">02 // Reward & Agent Training</h2>
-          <div className="space-y-8 text-xl leading-relaxed text-gray-400">
-            <p>
-              The agent uses <strong>Q-Learning</strong> to update its weights based on a specific reward signal. I designed this signal to prioritize survival over simple accuracy:
-            </p>
-            <div className="bg-black/40 border border-white/5 p-12 rounded-3xl font-mono text-xl space-y-6 max-w-4xl">
-              <div className="flex justify-between border-b border-white/10 pb-4">
-                <span className="text-gray-600 uppercase tracking-widest">Correct_Action</span>
-                <span className="text-[#00ff9f]">+8.0</span>
-              </div>
-              <div className="flex justify-between border-b border-white/10 pb-4">
-                <span className="text-gray-600 uppercase tracking-widest">Wrong_Action</span>
-                <span className="text-[#ff3355]">-8.0</span>
-              </div>
-              <div className="flex justify-between border-b border-white/10 pb-4">
-                <span className="text-gray-600 uppercase tracking-widest">System_Crash</span>
-                <span className="text-[#ff3355] font-bold">-20.0</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 4. PERFORMANCE PROOFS */}
-        <section className="space-y-32 pt-24 border-t border-white/5">
           
-          <div className="space-y-12">
-            <h2 className="text-3xl font-bold text-white tracking-tight">03 // Proof: Baseline vs. Agent</h2>
-            <p className="text-xl text-gray-500">
-              The graph below demonstrates the quantitative difference between a random agent and our trained Q-Learning model.
+          <div className="space-y-8">
+            <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tighter uppercase italic leading-none">
+              Inference <br/>
+              <span className="text-[#3a86ff] not-italic">Fundamentals</span>
+            </h1>
+            <p className="text-2xl leading-relaxed text-gray-400 max-w-5xl font-light">
+              I built Sortiq as a deep-dive into <strong>Reinforcement Learning</strong>. The objective was to move beyond static classification and master a dynamic, constrained environment. This project demonstrates an agent's ability to develop mathematical intuition for resource management through the <strong>Q-Learning</strong> loop.
             </p>
-            <div className="bg-black/60 border border-white/5 p-6 rounded-3xl overflow-hidden shadow-2xl">
-              <img 
-                src="https://raw.githubusercontent.com/Durgaprasad-Developer/Sortiq/main/assets/comparison.png" 
-                alt="Baseline Comparison" 
-                className="w-full h-auto opacity-90"
-              />
+          </div>
+        </section>
+
+        {/* 02. ENVIRONMENT LOGIC */}
+        <section className="grid lg:grid-cols-2 gap-20">
+          <div className="space-y-10">
+            <div className="flex items-center gap-4 text-[#00ff9f] font-mono text-[10px] tracking-[0.5em] uppercase">
+               <span>SYS_02</span>
+               <span>// Constraints</span>
+            </div>
+            <div className="space-y-8">
+              <h2 className="text-2xl font-bold text-white tracking-widest uppercase">The Environment</h2>
+              <div className="space-y-6 text-lg text-gray-500 border-l border-white/10 pl-8">
+                <p>The agent operates in a constrained MDP where survival is the primary objective:</p>
+                <ul className="space-y-4">
+                  <li className="flex gap-4">
+                    <span className="text-[#00ff9f] font-mono">01_</span>
+                    <span><strong>Buffer Limit:</strong> 6-unit storage. Overflow triggers immediate failure (-20.0 penalty).</span>
+                  </li>
+                  <li className="flex gap-4">
+                    <span className="text-[#00ff9f] font-mono">02_</span>
+                    <span><strong>Power Budget:</strong> 4 units per episode. Efficiency is mandatory.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
-          <div className="space-y-12">
-            <h2 className="text-3xl font-bold text-white tracking-tight">04 // Training Stability</h2>
-            <p className="text-xl text-gray-500">
-              This curve shows reward convergence over 15,000 episodes, indicating successful learning of the state-space.
-            </p>
-            <div className="bg-black/60 border border-white/5 p-6 rounded-3xl overflow-hidden shadow-2xl">
-              <img 
-                src="https://raw.githubusercontent.com/Durgaprasad-Developer/Sortiq/main/assets/training_curve.png" 
-                alt="Training Curve" 
-                className="w-full h-auto opacity-90"
-              />
+          <div className="space-y-10">
+            <div className="flex items-center gap-4 text-[#ffd32a] font-mono text-[10px] tracking-[0.5em] uppercase">
+               <span>VAL_03</span>
+               <span>// Reward Logic</span>
+            </div>
+            <div className="bg-[#05080a] border border-white/5 p-10 rounded-2xl font-mono text-sm space-y-4 shadow-2xl">
+               <div className="flex justify-between border-b border-white/5 pb-2">
+                 <span className="text-gray-600 tracking-widest uppercase">Action_Correct</span>
+                 <span className="text-[#00ff9f]">+8.0</span>
+               </div>
+               <div className="flex justify-between border-b border-white/5 pb-2">
+                 <span className="text-gray-600 tracking-widest uppercase">Action_Error</span>
+                 <span className="text-[#ff3355]">-8.0</span>
+               </div>
+               <div className="flex justify-between border-b border-white/5 pb-2">
+                 <span className="text-gray-600 tracking-widest uppercase">System_Crash</span>
+                 <span className="text-black bg-[#ff3355] px-2 font-bold">-20.0</span>
+               </div>
+               <p className="text-[10px] text-gray-800 italic pt-2 tracking-widest">// Policy: Q(s,a) = R + γ max Q(s',a')</p>
             </div>
           </div>
+        </section>
 
+        {/* 03. PERFORMANCE PROOFS */}
+        <section className="space-y-32 pt-16 border-t border-white/5">
+          <div className="text-center space-y-4">
+            <h2 className="text-[10px] font-mono text-gray-600 uppercase tracking-[1em]">Analytics // Validation</h2>
+            <p className="text-xl text-white font-light tracking-widest uppercase">Performance Data & Convergence</p>
+          </div>
+
+          <div className="space-y-32">
+            {/* FIG 01 */}
+            <div className="space-y-10">
+               <div className="bg-black/60 border border-white/5 p-4 rounded-3xl overflow-hidden shadow-2xl group">
+                 <img 
+                   src="https://raw.githubusercontent.com/Durgaprasad-Developer/Sortiq/main/assets/comparison.png" 
+                   alt="Comparison" 
+                   className="w-full h-auto opacity-80 group-hover:opacity-100 transition-opacity duration-700 grayscale group-hover:grayscale-0"
+                 />
+               </div>
+               <p className="text-center text-[10px] font-mono text-gray-700 tracking-[0.5em] uppercase italic">Fig_01 // Q-Learning vs. Random Baseline</p>
+            </div>
+
+            {/* FIG 02 */}
+            <div className="space-y-10">
+               <div className="bg-black/60 border border-white/5 p-4 rounded-3xl overflow-hidden shadow-2xl group">
+                 <img 
+                   src="https://raw.githubusercontent.com/Durgaprasad-Developer/Sortiq/main/assets/training_curve.png" 
+                   alt="Curve" 
+                   className="w-full h-auto opacity-80 group-hover:opacity-100 transition-opacity duration-700 grayscale group-hover:grayscale-0"
+                 />
+               </div>
+               <p className="text-center text-[10px] font-mono text-gray-700 tracking-[0.5em] uppercase italic">Fig_02 // Reward Stabilization Curve (15k Episodes)</p>
+            </div>
+          </div>
         </section>
 
         {/* FOOTER */}
-        <footer className="pt-24 border-t border-white/5 text-[10px] font-mono text-gray-800 uppercase tracking-[0.5em] text-center">
-          Sortiq RL System // Built by Durgaprasad Reddy
+        <footer className="pt-24 border-t border-white/5 text-center space-y-4">
+          <p className="text-[10px] font-mono text-gray-800 tracking-[1em] uppercase">
+            Sortiq Research // Project by Durgaprasad Reddy
+          </p>
         </footer>
 
       </div>
