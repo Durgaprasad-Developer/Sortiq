@@ -134,7 +134,7 @@ export default function Home() {
         
         const item = decision.item;
         const isFruit = item.type === 'FRUIT';
-        const preferred = decision.q_values.STORE > decision.q_values.CRUSH ? 'STORE' : 'CRUSH'
+        const preferred = decision.q_values.STORE >= decision.q_values.CRUSH ? 'STORE' : 'CRUSH'
         const confidence = Math.abs(decision.q_values.STORE - decision.q_values.CRUSH).toFixed(1)
 
         addLog(`   ${isFruit ? '🍎' : '🗑️'} ${item.features.color}-${item.features.shape}-${item.features.texture}`)
@@ -208,11 +208,21 @@ export default function Home() {
           setState(prev => ({ ...prev, phase: 'IDLE', itemIndex: prev.itemIndex + 1 }));
           await delay(T.BETWEEN);
         }
-
-      } catch (e) {
+      } catch (err) {
+        console.error("Simulation error:", err);
         addLog(`❌ ERROR: API connection lost`);
-        setRunning(false);
-        break;
+        addLog(`🔄 Attempting to reconnect...`);
+        // Wait and check health
+        await delay(2000);
+        const alive = await checkBackend();
+        if (!alive) {
+          addLog(`⚠️ Backend is OFFLINE. Simulation stopped.`);
+          setRunning(false);
+          break;
+        } else {
+          addLog(`✅ Reconnected! Resuming...`);
+          continue; // Try again
+        }
       }
     }
   }, [speed, addLog]);

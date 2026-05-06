@@ -3,7 +3,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-from SortingEnv import SortingEnv
+from Env.SortingEnv import SortingEnv
 
 # ─────────────────────────────────────────────
 # Setup
@@ -13,7 +13,7 @@ actions = ["STORE", "CRUSH"]
 N_EPISODES = 300
 
 # Load trained Q-table
-with open("q_table.json", "r") as f:
+with open("server/q_table.json", "r") as f:
     q_table = json.load(f)
 
 # ─────────────────────────────────────────────
