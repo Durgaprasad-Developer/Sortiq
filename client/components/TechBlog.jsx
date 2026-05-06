@@ -2,141 +2,108 @@ import React from 'react';
 
 const TechBlog = () => {
   return (
-    <article id="tech-blog" className="w-full bg-[#020205] text-gray-400 font-sans selection:bg-[#3a86ff]/30 py-48 px-6 flex flex-col items-center">
-      <div className="w-full max-w-4xl space-y-32">
+    <article id="tech-blog" className="w-full bg-[#020205] text-gray-400 font-sans selection:bg-[#3a86ff]/30 py-32 px-6 flex flex-col items-center">
+      <div className="w-full max-w-4xl space-y-40">
         
         {/* HEADER */}
-        <header className="mb-40 text-center space-y-8">
-          <div className="inline-block px-4 py-1 border border-[#3a86ff]/20 bg-[#3a86ff]/5 rounded-full text-[9px] font-mono tracking-[0.3em] text-[#3a86ff] uppercase">
-            Technical Specification // v1.0.4
+        <header className="text-center space-y-6">
+          <div className="inline-block px-3 py-1 border border-[#3a86ff]/30 text-[#3a86ff] text-[9px] font-mono tracking-[0.3em] uppercase mb-4">
+            Technical Specification // V1.0.4
           </div>
-          <h1 className="text-6xl font-black text-white tracking-tighter uppercase italic leading-none">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-none">
             REINFORCEMENT <br/>
-            <span className="text-[#3a86ff] not-italic">LEARNING ENGINE</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3a86ff] to-[#00d2ff]">LEARNING ENGINE</span>
           </h1>
-          <p className="text-sm font-mono text-gray-600 tracking-widest uppercase italic">
-            Built from scratch // Pure Q-Learning implementation
+          <p className="text-xs font-mono tracking-[0.4em] text-gray-600 uppercase">
+            Built from scratch // Pure Q-Learning Implementation
           </p>
         </header>
 
-        {/* CONTENT SECTIONS */}
-        <div className="space-y-40">
-          
-          {/* SECTION 01 */}
-          <section className="space-y-10">
-            <div className="flex items-center gap-4">
-              <span className="text-[10px] font-mono text-[#3a86ff]">01 //</span>
-              <h2 className="text-xs font-mono uppercase tracking-[0.4em] text-white italic">The Objective</h2>
-            </div>
-            <p className="text-2xl text-white font-light leading-snug tracking-tight">
-              Mastering physical constraints through <strong>mathematical intuition</strong>.
+        {/* 01 // OBJECTIVE */}
+        <section className="space-y-8">
+          <div className="flex items-center gap-4 text-[#3a86ff] font-mono text-[10px] tracking-widest uppercase">
+            <span>01 // THE OBJECTIVE</span>
+            <div className="flex-1 h-[1px] bg-gradient-to-r from-[#3a86ff]/30 to-transparent" />
+          </div>
+          <div className="border-l-2 border-[#3a86ff]/20 pl-8 space-y-6">
+            <h2 className="text-3xl font-semibold text-white tracking-tight">Mastering physical constraints through mathematical intuition.</h2>
+            <p className="text-lg leading-relaxed text-gray-400 font-light">
+              Sortiq isn't a simple classifier. It is a <span className="text-white font-medium">Dynamic Environment</span> where an agent must survive using the Bellman Equation. By removing pre-built libraries, we exposed the raw tension between accuracy and resource management.
             </p>
-            <div className="text-lg leading-relaxed text-gray-400 space-y-6">
-              <p>
-                Sortiq isn't a simple classifier. It is a <strong>Dynamic Environment</strong> where an agent must survive using the Bellman Equation. By removing pre-built libraries, we exposed the raw tension between accuracy and resource management.
-              </p>
-              <p>
-                The agent learns to navigate a state-space of 10,080 unique configurations, optimizing for long-term survival rather than immediate points.
-              </p>
-            </div>
-          </section>
-
-          {/* SECTION 02 */}
-          <section className="space-y-12">
-            <div className="flex items-center gap-4">
-              <span className="text-[10px] font-mono text-[#06d6a0]">02 //</span>
-              <h2 className="text-xs font-mono uppercase tracking-[0.4em] text-white italic">The Environment</h2>
-            </div>
-            <p className="text-lg leading-relaxed text-gray-400">
-              The simulation enforces a <strong>Constrained MDP</strong> (Markov Decision Process). Success is dictated by two critical bottlenecks:
+            <p className="text-lg leading-relaxed text-gray-400 font-light">
+              The agent learns to navigate a state-space of 10,080 unique configurations, optimizing for long-term survival rather than immediate points.
             </p>
-            <div className="space-y-12 pt-4">
-              <div className="group">
-                <h3 className="text-white font-bold tracking-widest uppercase text-xs mb-3 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-[#06d6a0] rounded-full" /> Buffer Management
-                </h3>
-                <p className="text-base text-gray-500 leading-relaxed pl-4 border-l border-white/5">
-                  A 6-unit storage limit forces the agent to estimate the <strong>Probability of Overflow</strong>. It learns to dump items when the risk of a crash outweighs the value of a correct sort.
-                </p>
-              </div>
-              <div className="group">
-                <h3 className="text-white font-bold tracking-widest uppercase text-xs mb-3 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-[#3a86ff] rounded-full" /> Power Consumption
-                </h3>
-                <p className="text-base text-gray-500 leading-relaxed pl-4 border-l border-white/5">
-                  Energy is finite. The agent must develop a <strong>Stochastic Strategy</strong>—waiting for waste items to clear the conveyor rather than crushing everything blindly.
-                </p>
-              </div>
-            </div>
-          </section>
+          </div>
+        </section>
 
-          {/* SECTION 03 */}
-          <section className="space-y-12">
-            <div className="flex items-center gap-4">
-              <span className="text-[10px] font-mono text-[#ff6b6b]">03 //</span>
-              <h2 className="text-xs font-mono uppercase tracking-[0.4em] text-white italic">Reward Logic</h2>
-            </div>
-            <div className="bg-white/[0.01] border border-white/5 rounded-[2rem] p-12 space-y-10">
-              <p className="text-center text-sm text-gray-500 italic">"Survival is the primary reward signal."</p>
-              <div className="space-y-4 font-mono text-[11px] tracking-wider uppercase">
-                <div className="flex justify-between border-b border-white/5 pb-4">
-                  <span className="text-gray-600">Correct_Action</span>
-                  <span className="text-[#06d6a0] font-bold">+8.0</span>
-                </div>
-                <div className="flex justify-between border-b border-white/5 pb-4">
-                  <span className="text-gray-600">Minor_Error</span>
-                  <span className="text-[#ff6b6b] font-bold">-8.0</span>
-                </div>
-                <div className="flex justify-between border-b border-white/5 pb-4 text-red-500 font-black">
-                  <span>System_Crash</span>
-                  <span>-20.0</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">End_Bonus</span>
-                  <span className="text-[#3a86ff] font-bold">+15.0</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* SECTION 04 */}
-          <section className="space-y-20">
-            <div className="space-y-8 text-center">
-              <h2 className="text-[10px] font-mono uppercase tracking-[0.4em] text-white italic opacity-50">04 // Training Analytics</h2>
-              <p className="text-lg font-light text-gray-400">
-                Data convergence after 15,000 learning iterations.
+        {/* 02 // ENVIRONMENT */}
+        <section className="space-y-8">
+          <div className="flex items-center gap-4 text-[#00ff9f] font-mono text-[10px] tracking-widest uppercase">
+            <span>02 // THE ENVIRONMENT</span>
+            <div className="flex-1 h-[1px] bg-gradient-to-r from-[#00ff9f]/30 to-transparent" />
+          </div>
+          <div className="grid md:grid-cols-2 gap-12 border-l-2 border-[#00ff9f]/20 pl-8">
+            <div className="space-y-4">
+              <h3 className="text-white font-semibold uppercase tracking-widest text-xs">Buffer Management</h3>
+              <p className="text-sm leading-relaxed text-gray-500">
+                A 6-unit storage limit forces the agent to estimate the <span className="text-[#00ff9f]">Probability of Overflow</span>. It learns to dump items when the risk of a crash outweighs the value of a correct sort.
               </p>
             </div>
-            
-            <div className="space-y-32">
-              <div className="space-y-6">
-                <div className="bg-black/40 border border-white/10 rounded-[2.5rem] p-6 shadow-2xl group hover:border-[#3a86ff]/40 transition-all duration-700">
-                  <img 
-                    src="https://github.com/Durgaprasad-Developer/Sortiq/raw/main/assets/training_curve.png" 
-                    alt="Training" 
-                    className="w-full opacity-40 group-hover:opacity-100 transition-opacity duration-1000 grayscale group-hover:grayscale-0"
-                  />
-                </div>
-                <p className="text-center text-[9px] font-mono text-gray-700 tracking-[0.5em] uppercase">Fig_01: Reward Stabilization</p>
-              </div>
+            <div className="space-y-4">
+              <h3 className="text-white font-semibold uppercase tracking-widest text-xs">Power Consumption</h3>
+              <p className="text-sm leading-relaxed text-gray-500">
+                Energy is finite. The agent must develop a <span className="text-[#ff6b35]">Stochastic Strategy</span>—waiting for waste items to clear the conveyor rather than crushing everything blindly.
+              </p>
+            </div>
+          </div>
+        </section>
 
-              <div className="space-y-6">
-                <div className="bg-black/40 border border-white/10 rounded-[2.5rem] p-6 shadow-2xl group hover:border-[#06d6a0]/40 transition-all duration-700">
-                  <img 
-                    src="https://github.com/Durgaprasad-Developer/Sortiq/raw/main/assets/comparison.png" 
-                    alt="Comparison" 
-                    className="w-full opacity-40 group-hover:opacity-100 transition-opacity duration-1000 grayscale group-hover:grayscale-0"
-                  />
+        {/* 03 // LOGIC CARDS */}
+        <section className="bg-[#05050a] border border-white/5 p-12 space-y-12">
+           <div className="text-center space-y-2">
+              <p className="text-[10px] font-mono text-gray-600 uppercase tracking-[0.5em]">03 // REWARD LOGIC</p>
+              <p className="text-sm italic text-gray-400">"Survival is the primary reward signal."</p>
+           </div>
+           
+           <div className="grid grid-cols-1 gap-4 font-mono text-[11px]">
+              {[
+                { label: 'CORRECT_ACTION', val: '+8.0', color: 'text-[#00ff9f]' },
+                { label: 'MINOR_ERROR', val: '-8.0', color: 'text-[#ff3355]' },
+                { label: 'SYSTEM_CRASH', val: '-20.0', color: 'bg-[#ff3355] text-black px-2' },
+                { label: 'END_BONUS', val: '+15.0', color: 'text-[#00aaff]' }
+              ].map((row, i) => (
+                <div key={i} className="flex justify-between items-center border-b border-white/5 pb-2">
+                  <span className="text-gray-600">{row.label}</span>
+                  <span className={row.color}>{row.val}</span>
                 </div>
-                <p className="text-center text-[9px] font-mono text-gray-700 tracking-[0.5em] uppercase">Fig_02: Evaluation vs Baseline</p>
+              ))}
+           </div>
+        </section>
+
+        {/* 04 // ANALYTICS */}
+        <section className="space-y-8">
+          <div className="flex items-center gap-4 text-[#ffd32a] font-mono text-[10px] tracking-widest uppercase">
+            <span>04 // TRAINING ANALYTICS</span>
+            <div className="flex-1 h-[1px] bg-gradient-to-r from-[#ffd32a]/30 to-transparent" />
+          </div>
+          <div className="space-y-6 text-center">
+            <p className="text-lg text-gray-400 font-light">Data convergence after 15,000 learning iterations.</p>
+            <div className="relative group overflow-hidden border border-white/5 bg-black/40 p-4">
+              <img 
+                src="/assets/comparison.png" 
+                alt="Training Data" 
+                className="w-full opacity-60 group-hover:opacity-100 transition-opacity duration-700 grayscale group-hover:grayscale-0"
+              />
+              <div className="absolute bottom-4 left-4 text-[9px] font-mono text-gray-700 uppercase tracking-widest">
+                Fig_01 // Reward Stabilization
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
 
         {/* FOOTER */}
-        <footer className="mt-60 pt-20 border-t border-white/5 text-center space-y-4">
-          <p className="text-[10px] font-mono tracking-[0.5em] text-gray-800 uppercase italic">
+        <footer className="pt-20 border-t border-white/5 text-center space-y-4">
+          <p className="text-[10px] font-mono text-gray-700 tracking-[0.5em] uppercase">
             Built by Durgaprasad Reddy // Sortiq RL System
           </p>
           <div className="flex justify-center gap-8 text-[8px] text-gray-900 font-bold uppercase tracking-widest">
@@ -145,6 +112,7 @@ const TechBlog = () => {
             <span>Docker</span>
           </div>
         </footer>
+
       </div>
     </article>
   );
