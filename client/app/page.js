@@ -251,22 +251,22 @@ export default function Home() {
   } = state
 
   return (
-    <main className="w-full min-h-screen bg-[#05050a] selection:bg-[#3a86ff]/30">
+    <main className="w-full bg-[#05050a] selection:bg-[#3a86ff]/30">
       
-      {/* SIMULATION SECTION */}
-      <section className="relative w-full h-[65vh] min-h-[500px] border-b border-white/10 bg-[#05050a] flex items-center justify-center">
+      {/* SIMULATION SECTION (TOP WORLD) */}
+      <section className="relative w-full h-[620px] bg-[#05050a] border-b border-white/10 flex items-center justify-center overflow-hidden">
         <MatrixBackground />
         
         {episodeBanner && (
           <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none anim-episode-banner">
-            <div className="text-xs text-[#ffd32a] font-mono p-6 bg-[#070d10ee] border-2 border-[#ffd32a] shadow-[0_0_40px_rgba(255,211,42,0.4)]">
+            <div className="text-[10px] text-[#ffd32a] font-mono p-4 bg-[#070d10ee] border border-[#ffd32a] shadow-[0_0_30px_rgba(255,211,42,0.3)]">
               {episodeBanner}
             </div>
           </div>
         )}
 
-        {/* Inner App Container (Centering everything) */}
-        <div className="relative z-10 w-full max-w-6xl h-full p-6 flex flex-col gap-4">
+        {/* Dashboard Container (Compact & Centered) */}
+        <div className="relative z-10 w-full max-w-5xl h-[580px] flex flex-col gap-3 p-4">
           <HUD
             episode={episode} score={score} storage={storage} energy={energy}
             itemIndex={itemIndex} running={running}
@@ -274,15 +274,15 @@ export default function Home() {
             speed={speed} onSpeedChange={setSpeed}
           />
 
-          <div className="flex gap-4 flex-1 min-h-0">
+          <div className="flex gap-3 flex-1 min-h-0">
             <EnvPanel stats={stats} episode={episode} />
 
-            <div className="flex flex-col gap-4 flex-1 min-w-0">
+            <div className="flex flex-col gap-3 flex-1 min-w-0">
               <div className="pixel-border p-2 scanlines relative bg-[#040a0d] flex-1">
                 <ConveyorBelt item={currentItem} phase={phase} itemIndex={itemIndex} />
               </div>
 
-              <div className="flex gap-4 h-[180px]">
+              <div className="flex gap-3 h-[160px]">
                 <AgentBrain qValues={qValues} phase={phase} lastAction={lastAction} isCorrect={lastCorrect} />
                 <ConsoleLog logs={logs} />
               </div>
@@ -294,21 +294,20 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex justify-between items-center text-[10px] font-mono tracking-widest text-gray-700">
-            <div className="flex gap-6 uppercase">
-              <span>System: <span className={running ? "text-[#06d6a0]" : "text-[#ff6b6b]"}>{running ? 'ONLINE' : 'IDLE'}</span></span>
-              <span>Backend: {backendStatus}</span>
+          <footer className="flex justify-between items-center text-[9px] font-mono tracking-[0.2em] text-gray-700 mt-2">
+            <div className="flex gap-4">
+              <span>SYSTEM: <span className={running ? "text-[#06d6a0]" : "text-[#ff6b6b]"}>{running ? 'ACTIVE' : 'IDLE'}</span></span>
+              <span>EP: {episode - 1}</span>
             </div>
-            <div className="flex gap-6 uppercase">
+            <div className="flex gap-4">
               <span>ACCURACY: {stats.totalItems ? Math.round(stats.correctItems / stats.totalItems * 100) : '--'}%</span>
               <span>ITEMS: {stats.totalItems}</span>
-              <span>EPS: {episode - 1}</span>
             </div>
-          </div>
+          </footer>
         </div>
       </section>
 
-      {/* DOCUMENTATION SECTION */}
+      {/* DOCUMENTATION SECTION (BOTTOM WORLD) */}
       <section className="w-full relative z-20">
         <TechBlog />
       </section>
