@@ -1,96 +1,115 @@
 const TechBlog = () => {
   return (
-    <article id="tech-blog" className="w-full bg-[#08080c] text-gray-300 font-sans selection:bg-[#3a86ff]/30 py-32 px-6 flex flex-col items-center">
-      <div className="w-full max-w-2xl">
+    <article id="tech-blog" className="w-full bg-[#050508] text-gray-400 font-sans selection:bg-[#3a86ff]/30 py-24 px-8 md:px-16 flex flex-col items-center">
+      <div className="w-full max-w-[1400px] space-y-32">
         
-        {/* EDITORIAL HEADER */}
-        <header className="mb-20 space-y-8 border-b border-white/5 pb-16">
-          <div className="flex items-center gap-4 text-[10px] font-mono tracking-[0.4em] text-[#3a86ff] uppercase">
-            <span>May 06, 2026</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-gray-800" />
-            <span>12 Minute Read</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight">
-            Sortiq: Training a Neural Agent to Navigate <span className="text-[#3a86ff]">Physical Constraints</span>.
+        {/* PROJECT HEADER */}
+        <header className="space-y-6 border-b border-white/5 pb-16">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white uppercase font-mono">
+            Project: Sortiq // RL Learning Environment
           </h1>
-          
-          <div className="flex items-center gap-4 pt-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#3a86ff] to-[#00d2ff] p-[1px]">
-              <div className="w-full h-full rounded-full bg-black flex items-center justify-center text-[10px] font-bold text-white">DP</div>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-white tracking-wide">Durgaprasad Reddy</p>
-              <p className="text-xs text-gray-500 font-mono uppercase tracking-tighter">Machine Learning Architect</p>
-            </div>
-          </div>
+          <p className="text-xl text-gray-500 max-w-4xl leading-relaxed">
+            This project was built to understand the fundamentals of Reinforcement Learning. It is a classification task under physical constraints, where an agent learns to prioritize actions based on environmental state rather than just simple labels.
+          </p>
         </header>
 
-        {/* NARRATIVE CONTENT */}
-        <div className="space-y-12 text-lg text-gray-400 leading-relaxed font-light">
-          <p className="text-xl text-white font-normal leading-snug">
-            Traditional sorting algorithms are deterministic. We wanted to build a system that is <span className="italic underline decoration-[#3a86ff]/40 underline-offset-8">experiential</span>—an agent that learns through the brutal repetition of failure and reward.
-          </p>
-
-          <p>
-            The project began with a simple question: Can a reinforcement learning agent develop "common sense" about resource management? In the Sortiq environment, the agent doesn't just sort items; it must manage energy and storage space.
-          </p>
-
-          <h2 className="text-2xl font-bold text-white pt-8 tracking-tight">The Reward Paradox</h2>
-          <p>
-            The hardest lesson for the Sortiq agent wasn't identifying a fruit from waste—it was learning when to <strong>do nothing</strong>. In an environment with finite energy, taking an action is often more expensive than the potential reward.
-          </p>
-
-          <div className="bg-black/60 border border-white/5 p-8 rounded-xl my-12 font-mono text-[11px] space-y-4">
-             <div className="flex justify-between border-b border-white/5 pb-2">
-               <span className="text-gray-600 uppercase tracking-widest">Action_Correct</span>
-               <span className="text-[#00ff9f]">+8.0</span>
-             </div>
-             <div className="flex justify-between border-b border-white/5 pb-2">
-               <span className="text-gray-600 uppercase tracking-widest">Collision_Penalty</span>
-               <span className="text-[#ff3355]">-20.0</span>
-             </div>
-             <p className="text-[9px] text-gray-700 italic pt-2">// The agent prioritizes survival over accuracy at low energy levels.</p>
-          </div>
-
-          <h2 className="text-2xl font-bold text-white pt-8 tracking-tight">Convergence & Real-time Inference</h2>
-          <p>
-            After roughly 15,000 episodes of training, the agent's Q-table begins to stabilize. The visualization you see at the top of this page is a live inference of those learned weights.
-          </p>
-
-          <figure className="my-16 space-y-4">
-            <div className="bg-[#05050a] border border-white/5 p-4 rounded-xl group overflow-hidden">
-              <img 
-                src="/assets/comparison.png" 
-                alt="Convergence Graph" 
-                className="w-full opacity-60 group-hover:opacity-100 transition-all duration-700 grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100"
-              />
+        <div className="grid lg:grid-cols-2 gap-24">
+          {/* SECTION 1: PURPOSE & ENV */}
+          <section className="space-y-10">
+            <div className="space-y-4">
+              <h2 className="text-xl font-mono text-[#3a86ff] tracking-[0.3em] uppercase">01 // Purpose & Environment</h2>
+              <div className="h-[1px] w-20 bg-[#3a86ff]" />
             </div>
-            <figcaption className="text-center text-[10px] font-mono text-gray-600 uppercase tracking-widest">
-              Figure 1.2: Reward distribution across training iterations.
-            </figcaption>
-          </figure>
+            <div className="space-y-6 text-lg leading-relaxed font-light">
+              <p>
+                The goal was to move beyond static datasets and explore a <strong>Markov Decision Process (MDP)</strong>. In this environment, the agent must sort items while managing two critical constraints:
+              </p>
+              <ul className="space-y-4 list-disc list-inside text-gray-500">
+                <li><span className="text-white">Storage Limit:</span> The store can only hold 6 items. Overfilling causes a system crash.</li>
+                <li><span className="text-white">Energy Limit:</span> Every action (Store or Crush) costs energy. The agent must survive 10 items per episode.</li>
+              </ul>
+              <p>
+                This forced me to implement a reward structure that balances accuracy with survival—the agent eventually learns to "wait" when resources are low.
+              </p>
+            </div>
+          </section>
 
-          <h2 className="text-2xl font-bold text-white pt-8 tracking-tight">Looking Ahead</h2>
-          <p>
-            The current architecture demonstrates the power of pure Q-learning in discrete environments. Future versions will explore <strong>Deep Q-Networks (DQN)</strong> to handle more complex, overlapping sensory data.
-          </p>
+          {/* SECTION 2: REWARD LOGIC */}
+          <section className="space-y-10">
+            <div className="space-y-4">
+              <h2 className="text-xl font-mono text-[#00ff9f] tracking-[0.3em] uppercase">02 // Reward & Agent</h2>
+              <div className="h-[1px] w-20 bg-[#00ff9f]" />
+            </div>
+            <div className="space-y-6">
+               <p className="text-lg font-light">
+                 I implemented a <strong>Q-Learning</strong> agent using a discrete Q-Table. The agent updates its understanding of state-action pairs using the Bellman Equation:
+               </p>
+               <div className="bg-black/40 border border-white/5 p-8 rounded-xl font-mono text-sm space-y-4">
+                 <div className="flex justify-between border-b border-white/10 pb-2">
+                   <span className="text-gray-600 uppercase">Correct_Sort</span>
+                   <span className="text-[#00ff9f]">+8.0 pts</span>
+                 </div>
+                 <div className="flex justify-between border-b border-white/10 pb-2">
+                   <span className="text-gray-600 uppercase">Wrong_Sort</span>
+                   <span className="text-[#ff3355]">-8.0 pts</span>
+                 </div>
+                 <div className="flex justify-between border-b border-white/10 pb-2">
+                   <span className="text-gray-600 uppercase">System_Crash</span>
+                   <span className="text-[#ff3355] font-bold">-20.0 pts</span>
+                 </div>
+                 <p className="text-[10px] text-gray-700 italic pt-2">// State = (storage_count, energy_left, item_type)</p>
+               </div>
+            </div>
+          </section>
         </div>
 
-        {/* BLOG FOOTER */}
-        <footer className="mt-32 pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-12">
-          <div className="text-[9px] font-mono text-gray-700 tracking-[0.5em] uppercase">
-            Sortiq Research Lab // 2026
+        {/* SECTION 3: PROOFS & ANALYTICS */}
+        <section className="space-y-16 pt-16 border-t border-white/5">
+          <div className="space-y-4">
+            <h2 className="text-xl font-mono text-[#ffd32a] tracking-[0.3em] uppercase text-center">03 // Proof of Learning</h2>
+            <p className="text-center text-gray-500 max-w-2xl mx-auto">
+              Comparing a random agent (no learning) against our trained Q-Table agent shows clear convergence.
+            </p>
           </div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="space-y-6">
+              <div className="bg-[#05050a] border border-white/5 p-6 rounded-xl">
+                <img 
+                  src="/assets/comparison.png" 
+                  alt="Training Performance" 
+                  className="w-full opacity-90"
+                />
+              </div>
+              <p className="text-center text-xs font-mono text-gray-700 uppercase tracking-widest">
+                Fig 3.1 // Trained Agent vs Random Baseline
+              </p>
+            </div>
+            
+            <div className="flex flex-col justify-center space-y-8">
+              <div className="border-l-4 border-[#ffd32a] pl-8 space-y-4">
+                <h3 className="text-2xl font-bold text-white tracking-tight">The Training Curve</h3>
+                <p className="text-lg text-gray-400 font-light leading-relaxed">
+                  As shown in the data, the agent initially fails almost 100% of the time. Around episode 2,000, it begins to understand the "survival" penalty, and by episode 15,000, it reaches a steady state of nearly perfect sorting within the given constraints.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FOOTER */}
+        <footer className="pt-24 border-t border-white/5 flex justify-between items-center text-[10px] font-mono text-gray-800 uppercase tracking-[0.5em]">
+          <span>Sortiq RL Project // Durgaprasad Reddy</span>
           <div className="flex gap-8">
-            <a href="#" className="text-xs text-gray-500 hover:text-[#3a86ff] transition-colors uppercase tracking-widest">Documentation</a>
-            <a href="#" className="text-xs text-gray-500 hover:text-[#3a86ff] transition-colors uppercase tracking-widest">GitHub</a>
+            <span>Next.js</span>
+            <span>FastAPI</span>
+            <span>Q-Learning</span>
           </div>
         </footer>
 
       </div>
     </article>
-  );
-};
+  )
+}
 
-export default TechBlog;
+export default TechBlog
