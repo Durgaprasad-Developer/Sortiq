@@ -254,8 +254,17 @@ export default function Home() {
     <main className="w-full bg-[#05050a] selection:bg-[#3a86ff]/30">
       
       {/* SECTION 1: THE APP STAGE (Fixed-Height Hero) */}
-      <section className="relative w-full h-[680px] bg-[#05050a] border-b border-white/5 flex items-center justify-center overflow-x-auto overflow-y-hidden scrollbar-hide">
+      <section className="relative w-full h-[740px] bg-[#05050a] border-b border-white/5 flex flex-col items-center pt-20 overflow-x-auto overflow-y-hidden scrollbar-hide">
         <MatrixBackground />
+        
+        {/* Title Header */}
+        <div className="relative z-20 mb-8 text-center">
+          <h2 className="text-[10px] font-mono tracking-[0.6em] text-[#3a86ff] uppercase opacity-70 flex items-center gap-4 justify-center">
+            <span className="w-8 h-[1px] bg-[#3a86ff]/30" />
+            Inference Visualization
+            <span className="w-8 h-[1px] bg-[#3a86ff]/30" />
+          </h2>
+        </div>
         
         {episodeBanner && (
           <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none anim-episode-banner">
