@@ -254,20 +254,20 @@ export default function Home() {
     <main className="w-full bg-[#05050a] selection:bg-[#3a86ff]/30">
       
       {/* SECTION 1: THE APP STAGE (Fixed-Height Hero) */}
-      <section className="relative w-full h-[780px] bg-[#05050a] border-b border-white/5 flex flex-col items-center pt-16 overflow-visible">
+      <section id="visualizer-stage" className="relative w-full h-[780px] bg-[#05050a] border-b-4 border-[#3a86ff]/20 flex flex-col items-center pt-16 overflow-hidden">
         <MatrixBackground />
         
         {/* Title Header */}
         <div className="relative z-20 mb-6 text-center">
           <h2 className="text-[9px] font-mono tracking-[0.6em] text-[#3a86ff] uppercase opacity-70 flex items-center gap-4 justify-center">
             <span className="w-6 h-[1px] bg-[#3a86ff]/30" />
-            Inference Visualization
+            Live Inference Stage
             <span className="w-6 h-[1px] bg-[#3a86ff]/30" />
           </h2>
         </div>
         
         {episodeBanner && (
-          <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none anim-episode-banner">
+          <div className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none anim-episode-banner">
             <div className="text-[10px] text-[#ffd32a] font-mono p-4 bg-[#070d10ee] border border-[#ffd32a] shadow-[0_0_30px_rgba(255,211,42,0.3)]">
               {episodeBanner}
             </div>
@@ -317,7 +317,10 @@ export default function Home() {
       </section>
 
       {/* SECTION 2: THE TECHNICAL DOCUMENT (Natural Scroll) */}
-      <section className="w-full relative z-20">
+      <section className="w-full relative z-20 bg-[#020205] border-t border-white/5">
+        <div className="w-full py-12 flex flex-col items-center bg-black/40">
+           <h3 className="text-[10px] font-mono tracking-[1em] text-gray-600 uppercase">Theory & Documentation</h3>
+        </div>
         <TechBlog />
       </section>
 
